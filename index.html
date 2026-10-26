@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurum 3D · Neural Credit Risk Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 3D Three.js WebGL Canvas -->
+  <canvas id="gl" aria-hidden="true"></canvas>
+
+  <!-- Ambient Cinematic Glow Backgrounds -->
+  <div class="ambient-glow"></div>
+  <div class="vignette"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">AURUM <span class="badge-3d">3D</span></div>
+        <div class="brand-sub">Neural Credit Underwriting Desk</div>
+      </div>
+    </div>
+    
+    <div class="header-right">
+      <!-- Quick Load Scenario Presets -->
+      <div class="presets-bar" id="presetsBar">
+        <span class="preset-label">Profiles:</span>
+        <button type="button" class="preset-btn" data-preset="prime" title="High income, excellent credit history">Prime</button>
+        <button type="button" class="preset-btn" data-preset="moderate" title="Balanced applicant profile">Moderate</button>
+        <button type="button" class="preset-btn" data-preset="high_risk" title="Low income, previous default history">Subprime</button>
+      </div>
+
+      <!-- Server Connection Status -->
+      <div class="chip" id="chip">
+        <span class="dot"></span>
+        <span id="chipTxt">Connecting to backend…</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Cockpit -->
+  <main class="cockpit">
+    <!-- Left Glass Card: Multi-Step Input & Verdict -->
+    <section class="card" id="card" aria-live="polite">
+      <nav class="steps" id="steps" aria-label="Assessment steps"></nav>
+      <div class="pane" id="pane"></div>
+      <div class="err" id="err" role="alert"></div>
+      <footer class="nav" id="nav"></footer>
+    </section>
+
+    <!-- Right Floating HUD Telemetry Card -->
+    <aside class="hud-panel" id="hudPanel">
+      <div class="hud-box">
+        <div class="hud-head">
+          <span class="hud-dot"></span>
+          <span class="hud-title">MODEL TELEMETRY</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-k">Architecture</span>
+          <span class="hud-v cyan">XGBoost + CalibratedCV</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-k">Calibrated Threshold</span>
+          <span class="hud-v" id="hudThreshold">69.5%</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-k">Loan-to-Income (LTI)</span>
+          <span class="hud-v gold" id="hudLti">25.0%</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-k">API Endpoint</span>
+          <span class="hud-v" id="hudApi">Auto-detecting...</span>
+        </div>
+      </div>
+
+      <div class="hud-hint">
+        <div class="hint-icon">✦</div>
+        <div class="hint-txt">
+          <b>Interactive 3D Holographic Core</b>
+          <span>Move cursor to orbit camera · Core changes particle dynamics and color based on computed default risk</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

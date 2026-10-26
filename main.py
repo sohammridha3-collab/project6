@@ -158,8 +158,10 @@ def predict(data: LoanApplication):
 
 
 # Mount static files directory for the frontend underwriting desk
-if STATIC_DIR.exists():
-    app.mount("/", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")
+target_static = STATIC_DIR if (STATIC_DIR.exists() and (STATIC_DIR / "index.html").exists()) else BASE_DIR
+if (target_static / "index.html").exists():
+    app.mount("/", StaticFiles(directory=str(target_static), html=True), name="static")
+
 
 
 if __name__ == "__main__":
