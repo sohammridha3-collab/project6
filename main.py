@@ -160,3 +160,27 @@ def predict(data: LoanApplication):
 # Mount static files directory for the frontend underwriting desk
 if STATIC_DIR.exists():
     app.mount("/", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")
+
+
+if __name__ == "__main__":
+    import socket
+    import uvicorn
+
+    def is_port_available(p: int) -> bool:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind(("127.0.0.1", p))
+                return True
+            except OSError:
+                return False
+
+    port = 8000 if is_port_available(8000) else 8001
+    print("\n" + "=" * 60)
+    print("Starting Credit Risk Assessment Server (FastAPI + CORS)...")
+    print(f"Web Application : http://127.0.0.1:{port}")
+    print(f"Swagger API Docs: http://127.0.0.1:{port}/docs")
+    print(f"Health Check    : http://127.0.0.1:{port}/health")
+    print("=" * 60 + "\n")
+    uvicorn.run("main:app", host="127.0.0.1", port=port, reload=True)
+
+
